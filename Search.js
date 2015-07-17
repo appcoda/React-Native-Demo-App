@@ -1,3 +1,7 @@
+/**
+ * Created by echessa on 4/24/15.
+ */
+
 'use strict';
 
 var React = require('react-native');
@@ -7,7 +11,7 @@ var {
     StyleSheet,
     NavigatorIOS,
     Component
-   } = React;
+    } = React;
 
 var styles = StyleSheet.create({
     container: {
@@ -23,7 +27,7 @@ class Search extends Component {
                 initialRoute={{
             title: 'Search Books',
             component: SearchBooks
-        }}/>            
+        }}/>
         );
     }
 }

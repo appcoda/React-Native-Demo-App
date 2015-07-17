@@ -1,9 +1,12 @@
+/**
+ * Created by echessa on 4/24/15.
+ */
+
 'use strict';
 
 var React = require('react-native');
-var BookDetail = require('./BookDetail');
-
 var REQUEST_URL = 'https://www.googleapis.com/books/v1/volumes?q=subject:fiction';
+var BookDetail = require('./BookDetail');
 
 var {
     Image,
@@ -14,7 +17,7 @@ var {
     ListView,
     TouchableHighlight,
     ActivityIndicatorIOS
-   } = React;
+    } = React;
 
 var styles = StyleSheet.create({
     container: {
@@ -41,46 +44,47 @@ var styles = StyleSheet.create({
         color: '#656565'
     },
     separator: {
-       height: 1,
-       backgroundColor: '#dddddd'
-   },
-   listView: {
-       backgroundColor: '#F5FCFF'
-   },
-   loading: {
-       flex: 1,
-       alignItems: 'center',
-       justifyContent: 'center'
-   }
+        height: 1,
+        backgroundColor: '#dddddd'
+    },
+    listView: {
+        backgroundColor: '#F5FCFF'
+    },
+    loading: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 });
 
 class BookList extends Component {
-   constructor(props) {
-       super(props);
-       this.state = {
-           isLoading: true,
-           dataSource: new ListView.DataSource({
-               rowHasChanged: (row1, row2) => row1 !== row2
-           })
-       };
-   }
 
-componentDidMount() {
-    this.fetchData();
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: true,
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2
+            })
+        };
+    }
 
-   }
+    componentDidMount() {
+        this.fetchData();
+    }
 
-fetchData() {
-       fetch(REQUEST_URL)
-       .then((response) => response.json())
-       .then((responseData) => {
-           this.setState({
-               dataSource: this.state.dataSource.cloneWithRows(responseData.items),
-               isLoading: false
-           });
-       })
-       .done();
-   }
+    fetchData() {
+
+        fetch(REQUEST_URL)
+            .then((response) => response.json())
+            .then((responseData) => {
+                this.setState({
+                    dataSource: this.state.dataSource.cloneWithRows(responseData.items),
+                    isLoading: false
+                });
+            })
+            .done();
+    }
 
     render() {
         if (this.state.isLoading) {
@@ -98,7 +102,7 @@ fetchData() {
 
     renderBook(book) {
         return (
-            <TouchableHighlight onPress={() => this.showBookDetail(book)}  underlayColor='#dddddd'>
+            <TouchableHighlight onPress={() => this.showBookDetail(book)} underlayColor='#dddddd'>
                 <View>
                     <View style={styles.container}>
                         <Image
@@ -127,13 +131,16 @@ fetchData() {
         );
     }
 
-showBookDetail(book) {
-       this.props.navigator.push({
-           title: book.volumeInfo.title,
-           component: BookDetail,
-           passProps: {book}
-       });
-   }
+    showBookDetail(book) {
+
+        this.props.navigator.push({
+            title: book.volumeInfo.title,
+            component: BookDetail,
+            passProps: {book}
+        });
+    }
+
+
 }
 
 module.exports = BookList;
