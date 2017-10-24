@@ -1,6 +1,6 @@
 # React Native Demo App for iOS
 
-Facebook open sourced React Native which is a framework that lets you 
+Facebook,BSD+Patent Licensed,React Native which is a framework that lets you 
 build native iOS and Android (at the moment Android support is still under 
 development) applications with JavaScript.
 
